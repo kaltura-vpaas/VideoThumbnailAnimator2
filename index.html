@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style type="text/css">
+        body {font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.01em;}
+        h1, h2 {font-weight: 300; color: #888; position: relative;}
+        p {font-size: 1.125em; color: #777; line-height: 1.6;}
+        a {color: #3b8bba; text-decoration: none;}
+        .videothumbnail {width: 19.6%; height: 49%; display: block; margin-right: 2px; margin-bottom: 2px; float: left;}
+        #thumbnails {width: 800px; height: 240px;resize: both; overflow: auto; border: 10px solid rgba(28, 99, 230, 0.4);}
+        #intro {width: 85%;}
+    </style>
+</head>
+<body>
+    <h1>Kaltura Video Thumbnails Animator</h1>
+    <section id="intro">
+      <p>Video thumbnails using Kaltura's Image Transformation API and JavaScript. Including low-rest blurred loading while animation stripe loads in the backgroud.</p>
+      <p>This script uses percentages based CSS logic to create responsive animated video thumbnails with CSS stripes of the video animation frames created by the <a href="https://developer.kaltura.com/api-docs/Engage_and_Publish/kaltura-thumbnail-api.html/" target="_blank">Kaltura Thumbnail API</a>.</p>
+    </section>
+    <h2>Hover over the thumbnails, and resize the section to play</h2>
+    <section id="thumbnails">
+        <div class="videothumbnail" kfps="4" kstartsec="0.1" kendsec="5" kslices="15" kwidth="300" kpid="2421271" kentryid="1_7q8u39f5" kquality="90" kcrop="4"></div>
+        <div class="videothumbnail" kfps="" kstartsec="2219" kendsec="2224" kslices="15" kwidth="300" kpid="2421271" kentryid="1_7z1sxr2x" kquality="90"></div>
+        <div class="videothumbnail" kfps="4" kstartsec="2012" kendsec="2020" kslices="15" kwidth="300" kpid="2421271" kentryid="1_yrsww4wb" kquality="90" kcrop="2"></div>
+        <div class="videothumbnail" kfps="3" kstartsec="100" kendsec="105" kslices="30" kwidth="300" kpid="2421271" kentryid="1_l8j20fh1" kquality="90" kcrop="2"></div>
+        <div class="videothumbnail" kfps="3" kstartsec="1" kslices="30" kwidth="300" kpid="2421271" kentryid="0_uanuf4gk" kquality="90" kcrop="2"></div>
+        <div style="clear: both;"></div>
+        <div class="videothumbnail" kfps="5" kslices="10" kwidth="300" kpid="2421271" kentryid="0_60gyd613"></div>
+        <div class="videothumbnail" kfps="6" kstartsec="1" kendsec="5" kslices="10" kwidth="300" kpid="2421271" kentryid="1_6axd2of0"></div>
+        <div class="videothumbnail" kfps="5" kstartsec="1" kendsec="5" kslices="10" kwidth="300" kpid="2421271" kentryid="1_ttzm547s"></div>
+        <div class="videothumbnail" kfps="3" kstartsec="1" kendsec="5" kslices="10" kwidth="300" kpid="2421271" kentryid="1_qx6chwid"></div>
+        <div class="videothumbnail" kfps="2" kstartsec="50.5" kendsec="60" kslices="10" kwidth="300" kpid="2421271" kentryid="1_71gyojxl"></div>
+    </section>
+    <script src="./KalturaThumbAnimator.js"></script>
+    <script>
+      var thumbAnimator = new KalturaThumbAnimator();
+      //thumbAnimator.setup("videothumbnail", 0, true); //use blurred deffered loading
+      thumbAnimator.setup("videothumbnail"); //regular load
+    </script>
+    <a href="https://github.com/kaltura/VideoThumbnailAnimator"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+</body>
+
+</html>
