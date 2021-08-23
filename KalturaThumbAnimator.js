@@ -5,6 +5,19 @@ function KalturaThumbAnimator() {
   var lazyWidth = 120;
   var _startFrame = 0;
 
+  //API expects int for crop type
+  //below are actual values for API.
+  var CROP_TYPE = new Map();
+  CROP_TYPE.set(1,"northwest"); 
+  CROP_TYPE.set(2,"north"); 
+  CROP_TYPE.set(3,"northeast"); 
+  CROP_TYPE.set(4, "west"); 
+  CROP_TYPE.set(5, "center"); 
+  CROP_TYPE.set(6, "east"); 
+  CROP_TYPE.set(7, "southwest"); 
+  CROP_TYPE.set(8, "south"); 
+  CROP_TYPE.set(9, "southeast");
+
   this.setup = function (thumbClassName,
     kalturaDomain = 'https://www.kaltura.com/api_v3/service/thumbnail_thumbnail',
     startFrame = 0,
@@ -29,13 +42,13 @@ function KalturaThumbAnimator() {
         '/p/' + thumbData.pid +
         '/action/transform/transformString/' +
         'id-' + thumbData.entryId +
-        ',vstrip_' +
-        'nos-' + thumbData.spriteSlices +
-        '_w-' + thumbData.pxWidth + 
-        (thumbData.startSec >= 0 ? '_ss-' + thumbData.startSec : '') +
+        ',vidStrip_' +
+        'numberofslices-' + thumbData.spriteSlices +
+        '_width-' + thumbData.pxWidth + 
+        (thumbData.startSec >= 0 ? '_startSec-' + thumbData.startSec : '') +
         (thumbData.endSec > 0 && 
-          (thumbData.endSec > thumbData.startSec) ? '_es-' + thumbData.endSec : '')+ 
-        ',o_q-90';
+          (thumbData.endSec > thumbData.startSec) ? '_endSec-' + thumbData.endSec : '')+ 
+        ',output_quality-90';
 
       /*'/quality/' + thumbData.quality + 
       '/type/' + thumbData.cropType + 
@@ -53,10 +66,10 @@ function KalturaThumbAnimator() {
         '/p/' + thumbData.pid +
         '/action/transform/transformString/' +
         'id-' + thumbData.entryId +
-        ',vsec'+
-         (thumbData.startSec >= 0 ? '_s-' + thumbData.startSec : '') +
-        '_w-' + thumbData.pxWidth + 
-        ',o_q-'+lazyQuality;
+        ',vidsec'+
+         (thumbData.startSec >= 0 ? '_startSec-' + thumbData.startSec : '') +
+        '_width-' + thumbData.pxWidth + 
+        ',output_quality-'+lazyQuality;
         
 
         /*'/p/' + thumbData.pid +
