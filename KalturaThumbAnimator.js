@@ -33,7 +33,8 @@ function KalturaThumbAnimator() {
         'nos-' + thumbData.spriteSlices +
         '_w-' + thumbData.pxWidth + 
         (thumbData.startSec >= 0 ? '_ss-' + thumbData.startSec : '') +
-        (thumbData.startSec >= 0 ? '_es-' + thumbData.endSec : '') +
+        (thumbData.endSec > 0 && 
+          (thumbData.endSec > thumbData.startSec) ? '_es-' + thumbData.endSec : '')+ 
         ',o_q-90';
 
       /*'/quality/' + thumbData.quality + 
@@ -46,7 +47,7 @@ function KalturaThumbAnimator() {
       //non-lazy which only makes 1 call to the api.
 
       if (_useLazy) {
-        console.log("LAZY"+thumbEl+"\n");
+        console.log("LAZY "+bgThumbSpriteUrl+"\n");
         console.log("ee");
         bgThumbSpriteUrlLowRes = kalturaDomain +
         '/p/' + thumbData.pid +
