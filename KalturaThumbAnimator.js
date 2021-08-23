@@ -31,7 +31,8 @@ function KalturaThumbAnimator() {
         'id-' + thumbData.entryId +
         ',vstrip_' +
         'nos-' + thumbData.spriteSlices +
-        '_w-' + thumbData.pxWidth * thumbData.spriteSlices;
+        '_w-' + thumbData.pxWidth * thumbData.spriteSlices + 
+        ',o_q-90';
 
       /*'/quality/' + thumbData.quality + 
       '/type/' + thumbData.cropType + 
