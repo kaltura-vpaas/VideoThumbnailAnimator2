@@ -6,7 +6,7 @@ function KalturaThumbAnimator() {
   var _startFrame = 0;
 
   this.setup = function (thumbClassName,
-    kalturaDomain = 'http://www.kaltura.com/api_v3/service/thumbnail_thumbnail',
+    kalturaDomain = 'https://www.kaltura.com/api_v3/service/thumbnail_thumbnail',
     startFrame = 0,
     useLazy = false,
     lazyFilter = 'grayscale(100%) brightness(130%)') {
@@ -31,7 +31,9 @@ function KalturaThumbAnimator() {
         'id-' + thumbData.entryId +
         ',vstrip_' +
         'nos-' + thumbData.spriteSlices +
-        '_w-' + thumbData.pxWidth * thumbData.spriteSlices + 
+        '_w-' + thumbData.pxWidth + 
+        (thumbData.startSec >= 0 ? '_ss-' + thumbData.startSec : '') +
+        (thumbData.startSec >= 0 ? '_es-' + thumbData.endSec : '') +
         ',o_q-90';
 
       /*'/quality/' + thumbData.quality + 
@@ -39,18 +41,33 @@ function KalturaThumbAnimator() {
       (thumbData.startSec >= 0 ? '/start_sec/' + thumbData.startSec : '') + 
       (thumbData.endSec > 0 && thumbData.endSec > thumbData.startSec ? '/end_sec/' + thumbData.endSec : '') + 
       '/file_name/thumbnail.jpg';*/
+
+      //lazy will load a lower quality image first. So lazy makes 2 calls versus
+      //non-lazy which only makes 1 call to the api.
+
       if (_useLazy) {
+        console.log("LAZY"+thumbEl+"\n");
+        console.log("ee");
         bgThumbSpriteUrlLowRes = kalturaDomain +
-          '/p/' + thumbData.pid +
+        '/p/' + thumbData.pid +
+        '/action/transform/transformString/' +
+        'id-' + thumbData.entryId +
+        ',vsec'+
+         (thumbData.startSec >= 0 ? '_s-' + thumbData.startSec : '') +
+        '_w-' + thumbData.pxWidth + 
+        ',o_q-'+lazyQuality;
+        
+
+        /*'/p/' + thumbData.pid +
           '/thumbnail/entry_id/' + thumbData.entryId +
           '/width/' + (lazyWidth > 0 ? lazyWidth : thumbData.pxWidth) +
           '/quality/' + lazyQuality +
           '/type/' + thumbData.cropType +
-          '/vid_slices/' + thumbData.spriteSlices +
-          '/vid_slice/' + _this._startFrame +
+          '/vid_sec' + 
           (thumbData.startSec >= 0 ? '/start_sec/' + thumbData.startSec : '') +
           (thumbData.endSec > 0 && thumbData.endSec > thumbData.startSec ? '/end_sec/' + thumbData.endSec : '') +
-          '/file_name/thumbnail.jpg';
+          '/file_name/thumbnail.jpg';*/
+
         thumbEl.style.backgroundImage = "url('" + bgThumbSpriteUrlLowRes + "')";
         thumbEl.style.backgroundPosition = "0% 0%";
         thumbEl.style.backgroundSize = "100% 100%";
