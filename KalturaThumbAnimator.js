@@ -5,19 +5,6 @@ function KalturaThumbAnimator() {
   var lazyWidth = 120;
   var _startFrame = 0;
 
-  //API expects int for crop type
-  //below are actual values for API.
-  var CROP_TYPE = new Map();
-  CROP_TYPE.set(1,"northwest"); 
-  CROP_TYPE.set(2,"north"); 
-  CROP_TYPE.set(3,"northeast"); 
-  CROP_TYPE.set(4, "west"); 
-  CROP_TYPE.set(5, "center"); 
-  CROP_TYPE.set(6, "east"); 
-  CROP_TYPE.set(7, "southwest"); 
-  CROP_TYPE.set(8, "south"); 
-  CROP_TYPE.set(9, "southeast");
-
   this.setup = function (thumbClassName,
     kalturaDomain = 'https://www.kaltura.com/api_v3/service/thumbnail_thumbnail',
     startFrame = 0,
@@ -50,12 +37,6 @@ function KalturaThumbAnimator() {
           (thumbData.endSec > thumbData.startSec) ? '_endSec-' + thumbData.endSec : '')+ 
         ',output_quality-90';
 
-      /*'/quality/' + thumbData.quality + 
-      '/type/' + thumbData.cropType + 
-      (thumbData.startSec >= 0 ? '/start_sec/' + thumbData.startSec : '') + 
-      (thumbData.endSec > 0 && thumbData.endSec > thumbData.startSec ? '/end_sec/' + thumbData.endSec : '') + 
-      '/file_name/thumbnail.jpg';*/
-
       //lazy will load a lower quality image first. So lazy makes 2 calls versus
       //non-lazy which only makes 1 call to the api.
 
@@ -67,20 +48,9 @@ function KalturaThumbAnimator() {
         '/action/transform/transformString/' +
         'id-' + thumbData.entryId +
         ',vidsec'+
-         (thumbData.startSec >= 0 ? '_startSec-' + thumbData.startSec : '') +
+         (thumbData.startSec >= 0 ? '_second-' + thumbData.startSec : '') +
         '_width-' + thumbData.pxWidth + 
         ',output_quality-'+lazyQuality;
-        
-
-        /*'/p/' + thumbData.pid +
-          '/thumbnail/entry_id/' + thumbData.entryId +
-          '/width/' + (lazyWidth > 0 ? lazyWidth : thumbData.pxWidth) +
-          '/quality/' + lazyQuality +
-          '/type/' + thumbData.cropType +
-          '/vid_sec' + 
-          (thumbData.startSec >= 0 ? '/start_sec/' + thumbData.startSec : '') +
-          (thumbData.endSec > 0 && thumbData.endSec > thumbData.startSec ? '/end_sec/' + thumbData.endSec : '') +
-          '/file_name/thumbnail.jpg';*/
 
         thumbEl.style.backgroundImage = "url('" + bgThumbSpriteUrlLowRes + "')";
         thumbEl.style.backgroundPosition = "0% 0%";
@@ -91,7 +61,7 @@ function KalturaThumbAnimator() {
         lazyimg.setAttribute("originalspriteSlices", thumbData.spriteSlices);
         lazyimg.setAttribute('kid', thumbUniqueId);
         lazyimg.src = bgThumbSpriteUrl;
-        lazyimg.onload = _this.resetThumbnail;
+        //lazyimg.onload = _this.resetThumbnail;
       }
       else {
         thumbEl.style.backgroundImage = "url('" + bgThumbSpriteUrl + "')";
@@ -126,14 +96,14 @@ function KalturaThumbAnimator() {
 
   this.getKThumbData = function (thumbEl) {
     var thumbData = {};
-    //manndatory params
+    //mandatory params
     thumbData.pid = _this.parseIntegerAttribute(thumbEl.getAttribute('kpid'));
     thumbData.entryId = thumbEl.getAttribute('kentryid');
     thumbData.pxWidth = _this.parseIntegerAttribute(thumbEl.getAttribute('kwidth'));
     thumbData.spriteSlices = _this.parseIntegerAttribute(thumbEl.getAttribute('kslices'));
+
     //optional params
-    thumbData.quality = _this.parseIntegerAttribute(thumbEl.getAttribute('kquality'), 100);
-    thumbData.cropType = _this.parseIntegerAttribute(thumbEl.getAttribute('kcrop'), 5);
+    thumbData.quality = _this.parseIntegerAttribute(thumbEl.getAttribute('kquality'), 75);
     thumbData.fps = _this.parseIntegerAttribute(thumbEl.getAttribute('kfps'), 4.5);
     thumbData.startSec = _this.parseFloatAttribute(thumbEl.getAttribute('kstartsec'), -1);
     thumbData.endSec = _this.parseFloatAttribute(thumbEl.getAttribute('kendsec'), -1);
