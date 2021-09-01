@@ -52,7 +52,7 @@ Passed as attributes on the thumbnail divs:
 
 ## `thumbAnimator.setup(thumbClassName, kalturaDomain, startFrame, useLazy, lazyFilter)` Parameters
 * `thumbClassName` - The CSS class name to apply the ThumbAnimator logic on. 
-* `kalturaDomain` - The Kaltura API host to work on (leave default if using Kaltura.com as your service, default: `://www.kaltura.com`) pass `undefined` for default.
+* `kalturaDomain` - The Kaltura API host to work on (leave default if using Kaltura.com as your service, default: `https://www.kaltura.com`) pass `undefined` for default.
 * `startFrame` - Often videos begin with a black frame (e.g. fade from black transition), this makes for an unpleasant thumbnail frame. To avoid it, you can set `startFrame` to begin from a non-0 frame, which will increase the chances of a more interesting frame being used as the static thumbnail shown while not during hover animation (default: 0).
 * `useLazy` - Apply blurred deferred background loading (true) or load stripes directly (default: `false`).
 * `lazyFilter` - The CSS filter to apply as blurring effect while bg loading the full stripe (default: `blur(3px) grayscale(100%) brightness(130%)`).

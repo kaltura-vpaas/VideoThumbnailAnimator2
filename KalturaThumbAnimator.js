@@ -6,7 +6,7 @@ function KalturaThumbAnimator() {
   var _startFrame = 0;
 
   this.setup = function (thumbClassName,
-    kalturaDomain = '://www.kaltura.com',
+    kalturaDomain = 'https://www.kaltura.com',
     startFrame = 0,
     useLazy = false,
     lazyFilter = 'grayscale(100%) brightness(130%)') {
