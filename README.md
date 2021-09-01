@@ -11,8 +11,9 @@ To achieve responsive behavior and adapt to any dimensions, the script uses perc
 * Thumbnail Stripe X Position in Percentage: the total slices minus 1 (0-index) described as percent (100 divided by total slices minus 1), multiplied by the current slice number (0-index). 
 
 # Setting up
-View-source on [`index.html`](https://kaltura.github.io/VideoThumbnailAnimator/) for a quick reference example.
+View-source on [`index.html`](https://kaltura.github.io/VideoThumbnailAnimator2/) for a quick reference example.
 Include the ThumbAnimator script:
+
 ```html
 <head>
   <script src="./KalturaThumbAnimator.js"></script>
