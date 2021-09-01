@@ -6,7 +6,7 @@ function KalturaThumbAnimator() {
   var _startFrame = 0;
 
   this.setup = function (thumbClassName,
-    kalturaDomain = 'https://www.kaltura.com/api_v3/service/thumbnail_thumbnail',
+    kalturaDomain = '://www.kaltura.com',
     startFrame = 0,
     useLazy = false,
     lazyFilter = 'grayscale(100%) brightness(130%)') {
@@ -25,7 +25,7 @@ function KalturaThumbAnimator() {
       thumbEl.addEventListener("mouseout", _this.mouseOut);
       thumbEl.addEventListener("touchend", _this.mouseOut);
       thumbEl.addEventListener("mouseup", _this.mouseOut);
-      bgThumbSpriteUrl = kalturaDomain +
+      bgThumbSpriteUrl = kalturaDomain + '/api_v3/service/thumbnail_thumbnail' +
         '/p/' + thumbData.pid +
         '/action/transform/transformString/' +
         'id-' + thumbData.entryId +
@@ -43,7 +43,7 @@ function KalturaThumbAnimator() {
       if (_useLazy) {
         console.log("LAZY "+bgThumbSpriteUrl+"\n");
         console.log("ee");
-        bgThumbSpriteUrlLowRes = kalturaDomain +
+        bgThumbSpriteUrlLowRes = kalturaDomain + '/api_v3/service/thumbnail_thumbnail' +
         '/p/' + thumbData.pid +
         '/action/transform/transformString/' +
         'id-' + thumbData.entryId +
