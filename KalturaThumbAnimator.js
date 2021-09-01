@@ -61,7 +61,7 @@ function KalturaThumbAnimator() {
         lazyimg.setAttribute("originalspriteSlices", thumbData.spriteSlices);
         lazyimg.setAttribute('kid', thumbUniqueId);
         lazyimg.src = bgThumbSpriteUrl;
-        //lazyimg.onload = _this.resetThumbnail;
+        lazyimg.onload = _this.resetThumbnail;
       }
       else {
         thumbEl.style.backgroundImage = "url('" + bgThumbSpriteUrl + "')";
